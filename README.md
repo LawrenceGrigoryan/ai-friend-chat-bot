@@ -1,5 +1,5 @@
 # ai-friend-chat-bot
-The repository contains a friendly empathetic chat-bot
+The repository contains a friendly empathetic telegram chat-bot
 
 
 # Repo structure
