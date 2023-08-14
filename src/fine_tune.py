@@ -16,7 +16,7 @@ from datasets import load_from_disk, Dataset
 from fine_tuning_config import FineTuningConfig
 
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO
 )
 
@@ -34,10 +34,10 @@ def build_lora_model(
     Build LoRA model
 
     Args:
-        model_name (str): _description_
-        model_load_params (dict): _description_
-        lora_rank (int, optional): _description_. Defaults to 8.
-        lora_alpha (int, optional): _description_. Defaults to 32.
+        model_name (str): Base model name
+        model_load_params (dict): Loading parameters
+        lora_rank (int, optional): Lora rank value. Defaults to 8.
+        lora_alpha (int, optional): Lora alpha value. Defaults to 32.
 
     Returns:
         Tuple[peft.peft_model.PeftModelForCausalLM, transformers.Tokenizer]: model and tokenizer
@@ -76,14 +76,14 @@ def load_and_tokenize_data(
     Load and tokenize datasets
 
     Args:
-        tokenizer (transformers.Tokenizer): _description_
-        train_data_path (str, optional): _description_. 
+        tokenizer (transformers.Tokenizer): Model tokenizer
+        train_data_path (str, optional): Path to train data. 
                                          Defaults to "../data/train.hf/".
-        eval_data_path (str, optional): _description_. 
+        eval_data_path (str, optional): Path to validation data. 
                                        Defaults to "../data/validation.hf/".
 
     Returns:
-        Tuple[Dataset, Dataset]: _description_
+        Tuple[Dataset, Dataset]: Tokenized train and validation datasets
     """
     # Load
     train_data = load_from_disk(train_data_path)

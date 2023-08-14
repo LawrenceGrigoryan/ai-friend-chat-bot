@@ -1,6 +1,7 @@
 """
 Utility functions
 """
+import logging
 from typing import Union
 
 import torch
@@ -10,6 +11,11 @@ from transformers import (
     pipeline
 )
 from peft import PeftModel
+
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO
+)
 
 
 def get_model(
@@ -27,24 +33,24 @@ def get_model(
                                               Defaults to None.
 
     Returns:
-        pipeline: _description_
+        pipeline: model pipeline
     """
-    # Load model and tokenizer
+    logging.info("Loading model and tokenizer")
     model = LlamaForCausalLM.from_pretrained(
         model_path,
         **model_load_params,
     )
     tokenizer = LlamaTokenizer.from_pretrained(model_path)
 
-    # Load adaptor weights if required
     if adaptor_weights_path:
+        logging.info("Loading adaptor weights")
         model = PeftModel.from_pretrained(
             model,
             adaptor_weights_path,
             torch_dtype=torch.float16
         )
 
-    # Create a simple pipeline
+    logging.info("Creating pipeline")
     model_pipeline = pipeline(
         "text-generation",
         model=model,

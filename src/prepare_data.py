@@ -16,7 +16,7 @@ from prompt_templates import (
 )
 
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO
 )
 
@@ -43,7 +43,7 @@ def concat_dialogue(messages: Union[List[str], pd.Series],
         else:
             messages[i] = MODEL_OUTPUT.format(model_output=messages[i].strip())
 
-    return system_prompt + ' '.join(messages)
+    return system_prompt + " ".join(messages)
 
 
 def prepare_empathetic_dataset(dataset: Dataset) -> Dataset:
@@ -56,24 +56,24 @@ def prepare_empathetic_dataset(dataset: Dataset) -> Dataset:
     Returns:
         Dataset: prepared dataset
     """
-    dataset.set_format('pandas')
+    dataset.set_format("pandas")
     df = dataset[:]
     # Filter out the most negative sentiments
-    negative_contexts = ['angry', 'jealous', 'disgusted', 'annoyed',
-                         'anxious', 'devastated', 'terrified', 'furious']
+    negative_contexts = ["angry", "jealous", "disgusted", "annoyed",
+                         "anxious", "devastated", "terrified", "furious"]
     df = df[~df.context.isin(negative_contexts)]
     # Filter out conversations with less than 1 sentence (they are buggy and useless)
-    conv_sizes = df.groupby(['conv_id']).size()
+    conv_sizes = df.groupby(["conv_id"]).size()
     convs2keep = conv_sizes[conv_sizes > 1].index
     df = df[df.conv_id.isin(convs2keep)]
     # Concat dialogues
-    df_grouped = df.groupby(['conv_id']).utterance \
+    df_grouped = df.groupby(["conv_id"]).utterance \
                    .apply(
         lambda x: concat_dialogue(x, EMPATHETIC_SYSTEM_PROMPT)
         ).reset_index()
-    df_grouped = df_grouped.rename(columns={'utterance': 'sample'})
-    df_grouped['sample'] = df_grouped['sample'].str.replace('_comma_', ', ')
-    df_grouped = df_grouped[['sample']]
+    df_grouped = df_grouped.rename(columns={"utterance": "sample"})
+    df_grouped["sample"] = df_grouped["sample"].str.replace("_comma_", ", ")
+    df_grouped = df_grouped[["sample"]]
     dataset_prepared = Dataset.from_pandas(df_grouped)
 
     return dataset_prepared
@@ -89,14 +89,14 @@ def prepare_daily_dataset(dataset: Dataset) -> Dataset:
     Returns:
         Dataset: prepared dataset
     """
-    dataset.set_format('pandas')
+    dataset.set_format("pandas")
     df = dataset[:]
     df_grouped = df.dialog.apply(
         lambda x: concat_dialogue(x, DAILY_SYSTEM_PROMPT)
         )
     df_grouped = df_grouped.reset_index() \
-                           .drop(['index'], axis=1) \
-                           .rename(columns={'dialog': 'sample'})
+                           .drop(["index"], axis=1) \
+                           .rename(columns={"dialog": "sample"})
     dataset_prepared = Dataset.from_pandas(df_grouped)
 
     return dataset_prepared
@@ -109,24 +109,24 @@ def prepare_data() -> NoReturn:
     Returns:
         NoReturn
     """
-    data_dir = Path('../data/')
-    dataset_name1 = 'empathetic_dialogues'
-    dataset_name2 = 'daily_dialog'
+    data_dir = Path("../data/")
+    dataset_name1 = "empathetic_dialogues"
+    dataset_name2 = "daily_dialog"
 
-    splits = ['train', 'validation', 'test']
+    splits = ["train", "validation", "test"]
     for split in splits:
-        logging.info('Preparing "{split}" split')
-        logging.info('Preparing empathetic dialogues')
+        logging.info("Preparing '{split}' split")
+        logging.info("Preparing empathetic dialogues")
         emp_dataset = load_dataset(dataset_name1, split=split)
         emp_dataset_prep = prepare_empathetic_dataset(emp_dataset)
-        logging.info('Preparing daily dialogues')
+        logging.info("Preparing daily dialogues")
         daily_dataset = load_dataset(dataset_name2, split=split)
         daily_dataset_prep = prepare_daily_dataset(daily_dataset)
-        logging.info('Concatenating datasets and saving current split to disk')
+        logging.info("Concatenating datasets and saving current split to disk")
         split_concat = concatenate_datasets([emp_dataset_prep,
                                              daily_dataset_prep])
-        split_concat.save_to_disk(data_dir.joinpath(f'{split}.hf'))
+        split_concat.save_to_disk(data_dir.joinpath(f"{split}.hf"))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     prepare_data()
