@@ -48,7 +48,7 @@ Install requirements
 pip install -r requirements.txt
 ```
 
-Set environmental variables in terminal and make sure you have **access to LLaMa2 model** on Hugging Face:
+Set environmental variables in terminal and make sure you have **an access to LLaMa2 model** on Hugging Face:
 ```
 export HF_AUTH_TOKEN=YOU_HF_AUTH_TOKEN
 export BOT_TOKEN=BOT_TOKEN
@@ -61,12 +61,12 @@ python3 tg_bot.py
 ```
 
 
-For the best user experience, it's recommended to be gentle with the bot and develop the relations gradually
+For the best user experience, it's recommended to be gentle with the bot at the beginning and develop the relations gradually. 
 
 
 # Problem
 
-The bot should make an emotional connection with the user, so the user feels some warm emotions from the beginning
+The bot should make an emotional connection with the user, so the user feels some warm emotions from the beginning.
 
 During the conversation, the bot should become more and more close and flirty with the person, maintaining the following schedule:
 
@@ -77,15 +77,15 @@ During the conversation, the bot should become more and more close and flirty wi
 
 # Key idea
 
-The key idea is really basic and straightforward - subsequently change the system prompt depending on the chat length to dynamically influence the model behavior and make it closer and closer to the user.
+The key idea is basic and straightforward - subsequently change the system prompt depending on the chat length to dynamically influence the model behavior and make it closer and closer to the user.
 
 
-Prompt templates used in this chat-bot are available here.
+Prompt templates used in this chat-bot are available [here](https://github.com/LawrenceGrigoryan/ai-friend-chat-bot/blob/main/src/prompt_templates.py).
 
 
 # Model
 
-**[LLaMa2-7B-Chat](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)** model is used in this chat-bot since its completely open for commercial usage and provides a great balance between the quality and model size
+**[LLaMa2-7B-Chat](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)** model is used in this chat-bot since its completely open for the commercial usage and provides a great balance between the quality and model size according to open LLM benchmarks
 
 
 # Parameter-efficient fine-tuning
@@ -102,7 +102,7 @@ The dataset is brought to a dialogue format that was used to pre-train LLaMa2 mo
 
 Since the final dataset is big enough to cause memory problems and my hardware availability is limited, I have conducted a few short fine-tuning experiments that did not lead to visible changes in model behavior. I believe though that longer fine-tuning with diverse and properly engineered system prompts can lead to greater results.
 
-The experiment results can be viewd at [Wandb Project](https://wandb.ai/lawrencegrigoryan/llm-friend-chat-bot?workspace=user-lawrencegrigoryan).
+The experiment results can be viewed at [Wandb Project](https://wandb.ai/lawrencegrigoryan/llm-friend-chat-bot?workspace=user-lawrencegrigoryan).
 
 
 # Evaluation
@@ -121,7 +121,7 @@ The experiment results can be viewd at [Wandb Project](https://wandb.ai/lawrence
 
 * In general, both models are quite confident if comparing with the open perplexity benchmark scores.
 
-* The evaluation approach itself is quite questionable since I take subjectively good dialogue that one of the users had with the chat-bot based on the original model. Then I calculate the perplexity of both the original and the fine-tuned model on this dialogue.
+* This evaluation approach itself is quite questionable since I take subjectively good dialogue that one of the users had with the chat-bot based on the original model. Then I calculate the perplexity of both the original and the fine-tuned model on this dialogue.
 
 ### User testing
 
@@ -130,7 +130,7 @@ The experiment results can be viewd at [Wandb Project](https://wandb.ai/lawrence
 
 ### Human evaluation
 
-* The best option is still to evaluate large amounts of dialogues by human experts though it is **extremely expensive** and **time-consuming**
+* The best approach is still to evaluate large amounts of model-user dialogues by human experts though it is **extremely expensive** and **time-consuming**
 
 
 
