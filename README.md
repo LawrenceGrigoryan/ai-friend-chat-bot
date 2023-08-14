@@ -20,24 +20,46 @@ The repository contains a friendly empathetic chat-bot
 
 # How-to
 
-To run the chat-bot, you'll need to provide your **telegram bot token** and **huggung face authentication token** in **Dockerfile** 
-
 Bot commands:
 * **/start** button initializes a new conversation
 * **/clear** button resets current conversation and saves chat history to logs
 
 
-Then built an image:
+### Run the bot:
+
+Clone repo:
 
 ```
-docker build -t ai-friend-bot .
+git clone https://github.com/LawrenceGrigoryan/ai-friend-chat-bot.git
 ```
 
-And run the container:
+Create conda venv:
 
 ```
-docker run -d --name ai-bot ai-friend-bot
+cd ai-fiend-chat-bot
+conda create -n ai_bot python=3.11
+conda activate ai_bot
 ```
+
+
+Install requirements
+
+```
+pip install -r requirements.txt
+```
+
+Set environmental variables in terminal and make sure you have **access to LLaMa2 model** on Hugging Face:
+```
+export HF_AUTH_TOKEN=YOU_HF_AUTH_TOKEN
+export BOT_TOKEN=BOT_TOKEN
+```
+
+Run the bot app:
+
+```
+python3 tg_bot.py
+```
+
 
 For the best user experience, it's recommended to be gentle with the bot and develop the relations gradually
 
