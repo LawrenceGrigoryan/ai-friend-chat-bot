@@ -15,7 +15,7 @@ MODEL_INFERENCE_PARAMS = {
     "top_p": 0.95,
     "temperature": 1.0,
     "num_return_sequences": 1,
-    "max_new_tokens": 128,
+    "max_new_tokens": 200,
     "repetition_penalty": 1.15,
     "use_cache": True
 }

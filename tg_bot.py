@@ -119,7 +119,7 @@ async def respond(update: Update, context: CallbackContext):
         user_history[user_id]["prompt"] = user_history[user_id]["prompt"].replace(INIT_SYSTEM_PROMPT,
                                                                                   CLOSE_SYSTEM_PROMPT)
     elif user_history[user_id]["msg_count"] > 30:
-        user_history[user_id]["prompt"] = user_history[user_id]["prompt"].replace(INIT_SYSTEM_PROMPT,
+        user_history[user_id]["prompt"] = user_history[user_id]["prompt"].replace(CLOSE_SYSTEM_PROMPT,
                                                                                   FLIRTY_SYSTEM_PROMPT)
 
     await context.bot.send_message(chat_id=update.effective_chat.id,
