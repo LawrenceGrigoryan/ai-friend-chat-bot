@@ -4,7 +4,7 @@ Model inference params
 import torch
 
 MODEL_PATH = "meta-llama/Llama-2-7b-chat-hf"
-ADAPTER_WEIGHTS_PATH = "../models/llama-chat-7b-lora-friendly-dialogue"
+ADAPTER_WEIGHTS_PATH = None
 MODEL_LOAD_PARAMS = {
     "device_map": "auto",
     "load_in_8bit": True,

@@ -1,6 +1,7 @@
 """
 Utility functions
 """
+import os
 import logging
 from typing import Union
 
@@ -16,6 +17,8 @@ logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO
 )
+
+HF_AUTH_TOKEN = os.environ["HF_AUTH_TOKEN"]
 
 
 def get_model(
@@ -39,8 +42,12 @@ def get_model(
     model = LlamaForCausalLM.from_pretrained(
         model_path,
         **model_load_params,
+        use_auth_token=HF_AUTH_TOKEN
     )
-    tokenizer = LlamaTokenizer.from_pretrained(model_path)
+    tokenizer = LlamaTokenizer.from_pretrained(
+        model_path,
+        use_auth_token=HF_AUTH_TOKEN
+    )
 
     if adapter_weights_path:
         logging.info("Loading adapter weights")

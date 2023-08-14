@@ -1,18 +1,45 @@
 # ai-friend-chat-bot
 The repository contains a friendly empathetic chat-bot
 
+
 # Repo structure
 
-📁 .github/           # GitHub-specific files (e.g., issue templates, workflows)\
-📁 docs/               # 📚 Documentation related to the project\
-📁 src/                # 🚀 Source code for the project\
-        - 📁 app/              # Main application code\
-        - 📁 lib/              # Supporting libraries and utilities\
-        - 📁 tests/            # Unit tests and test suites\
-📁 data/               # 📊 Data files required by the project (if applicable)\
-📁 examples/           # 🎉 Example code, demos, or usage scenarios\
-📄 LICENSE             # Project license information\
-📄 README.md           # This file, providing an overview of the project\
+* **data/** - contains preprocessed dataset for fine-tuning
+* **logs/** - log folder
+* **models/** - contains adapter weights for the model
+* **notebooks/** - jupter notebooks
+* **src/** - source code
+    - **fine_tune.py**  - fine-tuning script
+    - **fine_tuning_config.py** - config for fine-tuning
+    - **inference_config.py** - config for chat-bot inference
+    - **prepare_data.py** - script to prepare data
+    - **prompt_templates.py** - just prompt templates used in fine-tuning an at inference
+    - **tg_bot.py** - telegram bot app
+    - **utils.py** - some utilities for telegram bot app
+
+
+# How-to
+
+To run the chat-bot, you'll need to provide your **telegram bot token** and **huggung face authentication token** in **Dockerfile** 
+
+Bot commands:
+* **/start** button initializes a new conversation
+* **/clear** button resets current conversation and saves chat history to logs
+
+
+Then built an image:
+
+```
+docker build -t ai-friend-bot .
+```
+
+And run the container:
+
+```
+docker run -d --name ai-bot ai-friend-bot
+```
+
+For the best user experience, it's recommended to be gentle with the bot and develop the relations gradually
 
 
 # Problem
@@ -28,7 +55,7 @@ During the conversation, the bot should become more and more close and flirty wi
 
 # Key idea
 
-The key idea is really basic and straightforward - gradually change the system prompt depending on the chat length to dynamically influence the model behavior and make it closer and closer to the user.
+The key idea is really basic and straightforward - subsequently change the system prompt depending on the chat length to dynamically influence the model behavior and make it closer and closer to the user.
 
 
 Prompt templates used in this chat-bot are available here.
@@ -37,6 +64,7 @@ Prompt templates used in this chat-bot are available here.
 # Model
 
 **[LLaMa2-7B-Chat](https://huggingface.co/meta-llama/Llama-2-7b-chat-hf)** model is used in this chat-bot since its completely open for commercial usage and provides a great balance between the quality and model size
+
 
 # Parameter-efficient fine-tuning
 
@@ -87,6 +115,9 @@ The experiment results can be viewd at [Wandb Project](https://wandb.ai/lawrence
 # Further improvements
 
 * Taking summary of chat history instead of the whole history to make the model input more lightweight and enable longer conversations
+
+
+* Taking summary of conversations from the previous days might help to give the chat-bot some kind of memory to understand that this is not the first interaction with user
 
 
 * More experiments with proper prompt engineering to regulate model behaviour

@@ -24,7 +24,7 @@ from inference_config import (
     MODEL_LOAD_PARAMS,
     MODEL_INFERENCE_PARAMS
 )
-from prompt_templates import (
+from src.prompt_templates import (
     INIT_SYSTEM_PROMPT,
     CLOSE_SYSTEM_PROMPT,
     FLIRTY_SYSTEM_PROMPT,
@@ -33,14 +33,14 @@ from prompt_templates import (
 )
 
 # Get bot token
-bot_token = os.environ["BOT_TOKEN"]
+BOT_TOKEN = os.environ["BOT_TOKEN"]
 
 # Create logging structure
 logging.basicConfig(
     format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     level=logging.INFO
 )
-logs_dir = Path("../logs/")
+logs_dir = Path("logs/")
 
 # Load the model pipeline
 model_pipeline = get_model(
@@ -148,7 +148,7 @@ async def clear(update: Update, context: CallbackContext):
 
 
 def run_bot() -> NoReturn:
-    application = ApplicationBuilder().token(bot_token).build()
+    application = ApplicationBuilder().token(BOT_TOKEN).build()
 
     start_handler = CommandHandler("start", start)
     clear_handler = CommandHandler("clear", clear)
