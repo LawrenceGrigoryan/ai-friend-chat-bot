@@ -15,8 +15,6 @@ The repository contains a friendly empathetic chat-bot
 📄 README.md           # This file, providing an overview of the project\
 
 
-
-
 # Problem
 
 The bot should make an emotional connection with the user, so the user feels some warm emotions from the beginning
@@ -50,6 +48,8 @@ Fine-tuning process includes three datasets:
 
 Later it was found that the second one is almost a complete duplicate of the first one.
 
+The dataset is brought to a dialogue format that was used to pre-train LLaMa2 model.
+
 Since the final dataset is big enough to cause memory problems and my hardware availability is limited, I have conducted a few short fine-tuning experiments that did not lead to visible changes in model behavior. I believe though that longer fine-tuning with diverse and proper engineered system prompts can lead to greater results.
 
 The experiment results can be viewd at [Wandb Project](https://wandb.ai/lawrencegrigoryan/llm-friend-chat-bot?workspace=user-lawrencegrigoryan).
@@ -57,23 +57,28 @@ The experiment results can be viewd at [Wandb Project](https://wandb.ai/lawrence
 
 # Evaluation
 
-## Perplexity
+### Perplexity
 
-* I calculated the perplexity based on one of the real dialogues between the user and the chat-bot, results are here
-
-
-* In general, the perplexity is quite low in comparison with open benchmarks
-
-
-* Perplexity is a standard method for automatic LM evaluation though it doesn't actually illustrate the real practical quality of the model
+|Metric| Base model | Fine-tuned model|
+|-------|---------|--------|
+|Perplexity| 5.3  | 3.3 |
 
 
-## User testing
+
+* Perplexity was calculated based on one of the real dialogues between the user and the chat-bot
+
+* Even a slight fine-tuning makes the model more confident when maintaining a friendly/close/flirty dialogue, though that doesn't guarantee high model accuracy at inference.
+
+* In general, both models are quite confident if comparing with the open perplexity benchmark scores.
+
+* The evaluation approach itself is quite questionable since I take subjectively good dialogue that one of the users had with the chat-bot based on the original model. Then I calculate the perplexity of both the original and the fine-tuned model on this dialogue.
+
+### User testing
 
 * I also conducted "user testing" by giving several people access to this chat-bot and received mostly positive feedbacks
 
 
-## Human evaluation
+### Human evaluation
 
 * The best option is still to evaluate large amounts of dialogues by human experts though it is **extremely expensive** and **time-consuming**
 
@@ -92,7 +97,7 @@ The experiment results can be viewd at [Wandb Project](https://wandb.ai/lawrence
 
 * Efficient scalable inference using vLLM or TGI
 
-# Contactme
+# Contact
 
 Feel free to contact me:
 
