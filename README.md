@@ -100,7 +100,7 @@ Later it was found that the second one is almost a complete duplicate of the fir
 
 The dataset is brought to a dialogue format that was used to pre-train LLaMa2 model.
 
-Since the final dataset is big enough to cause memory problems and my hardware availability is limited, I have conducted a few short fine-tuning experiments that did not lead to visible changes in model behavior. I believe though that longer fine-tuning with diverse and proper engineered system prompts can lead to greater results.
+Since the final dataset is big enough to cause memory problems and my hardware availability is limited, I have conducted a few short fine-tuning experiments that did not lead to visible changes in model behavior. I believe though that longer fine-tuning with diverse and properly engineered system prompts can lead to greater results.
 
 The experiment results can be viewd at [Wandb Project](https://wandb.ai/lawrencegrigoryan/llm-friend-chat-bot?workspace=user-lawrencegrigoryan).
 
