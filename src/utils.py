@@ -12,9 +12,10 @@ from transformers import (
 from peft import PeftModel
 
 
-def get_model(model_path: str,
-              model_load_params: dict,
-              adaptor_weights_path: str = Union[str, None]) -> pipeline:
+def get_model(
+        model_path: str,
+        model_load_params: dict,
+        adaptor_weights_path: str = Union[str, None] = None) -> pipeline:
     """
     Get model pipeline for inference
 

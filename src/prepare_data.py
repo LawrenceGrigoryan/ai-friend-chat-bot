@@ -1,6 +1,7 @@
 """
 Data preparation scripts for fine-tuning
 """
+import logging
 from typing import Union, List, NoReturn
 from pathlib import Path
 
@@ -12,6 +13,11 @@ from prompt_templates import (
     MODEL_OUTPUT,
     EMPATHETIC_SYSTEM_PROMPT,
     DAILY_SYSTEM_PROMPT
+)
+
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO
 )
 
 
@@ -109,10 +115,14 @@ def prepare_data() -> NoReturn:
 
     splits = ['train', 'validation', 'test']
     for split in splits:
+        logging.info('Preparing "{split}" split')
+        logging.info('Preparing empathetic dialogues')
         emp_dataset = load_dataset(dataset_name1, split=split)
-        daily_dataset = load_dataset(dataset_name2, split=split)
         emp_dataset_prep = prepare_empathetic_dataset(emp_dataset)
+        logging.info('Preparing daily dialogues')
+        daily_dataset = load_dataset(dataset_name2, split=split)
         daily_dataset_prep = prepare_daily_dataset(daily_dataset)
+        logging.info('Concatenating datasets and saving current split to disk')
         split_concat = concatenate_datasets([emp_dataset_prep,
                                              daily_dataset_prep])
         split_concat.save_to_disk(data_dir.joinpath(f'{split}.hf'))

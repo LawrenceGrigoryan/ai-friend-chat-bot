@@ -20,6 +20,7 @@ from telegram.ext import (
 from utils import get_model
 from inference_config import (
     MODEL_PATH,
+    ADAPTOR_WEIGHTS_PATH,
     MODEL_LOAD_PARAMS,
     MODEL_INFERENCE_PARAMS
 )
@@ -42,7 +43,11 @@ logging.basicConfig(
 logs_dir = Path('../logs/')
 
 # Load the model pipeline
-model_pipeline = get_model(MODEL_PATH, MODEL_LOAD_PARAMS)
+model_pipeline = get_model(
+    MODEL_PATH,
+    MODEL_LOAD_PARAMS,
+    ADAPTOR_WEIGHTS_PATH
+)
 # Initialize a dictionary to store user conversation history
 user_history = defaultdict(dict)
 
