@@ -1,0 +1,10 @@
+**data/
+**logs/
+**notebooks/
+**outputs/
+src/fine_tune*
+src/prepare_data.py
+.env
+.gitignore
+README.md
+LICENSE
