@@ -1,4 +1,6 @@
 python-telegram-bot==20.4
+accelerate==0.21.0
+sentencepiece==0.1.99
 transformers==4.29.2
 torch==2.0.1
 peft==0.4.0

@@ -21,7 +21,7 @@ logging.basicConfig(
 def get_model(
         model_path: str,
         model_load_params: dict,
-        adaptor_weights_path: str = Union[str, None]
+        adapter_weights_path: Union[str, None] = None
         ) -> pipeline:
     """
     Get model pipeline for inference
@@ -29,7 +29,7 @@ def get_model(
     Args:
         model_path (str): LLM model path
         model_load_params (dict): model loading params
-        adaptor_weights_path (str, optional): If give, load adaptor weights.
+        adapter_weights_path (str, optional): If give, load adaptor weights.
                                               Defaults to None.
 
     Returns:
@@ -42,11 +42,11 @@ def get_model(
     )
     tokenizer = LlamaTokenizer.from_pretrained(model_path)
 
-    if adaptor_weights_path:
-        logging.info("Loading adaptor weights")
+    if adapter_weights_path:
+        logging.info("Loading adapter weights")
         model = PeftModel.from_pretrained(
             model,
-            adaptor_weights_path,
+            adapter_weights_path,
             torch_dtype=torch.float16
         )
 
