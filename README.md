@@ -36,7 +36,7 @@ git clone https://github.com/LawrenceGrigoryan/ai-friend-chat-bot.git
 Create conda venv:
 
 ```
-cd ai-fiend-chat-bot
+cd ai-friend-chat-bot
 conda create -n ai_bot python=3.11
 conda activate ai_bot
 ```
