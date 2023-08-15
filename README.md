@@ -7,7 +7,7 @@ The repository contains a friendly empathetic telegram chat-bot
 * **data/** - contains preprocessed dataset for fine-tuning
 * **logs/** - log folder
 * **models/** - contains adapter weights for the model
-* **notebooks/** - jupter notebooks
+* **notebooks/** - jupyter notebooks
 * **src/** - source code
     - **fine_tune.py**  - fine-tuning script
     - **fine_tuning_config.py** - config for fine-tuning
