@@ -20,15 +20,18 @@ The repository contains a friendly empathetic telegram chat-bot
 
 # How-to
 
-Bot commands:
+### Prerequisites
+
+* Ubuntu 18.04
+* CUDA 11.7
+* Python 3.11+
+
+### Bot commands:
 * **/start** button initializes a new conversation
 * **/clear** button resets current conversation and saves chat history to logs
 
 
 ### Run the bot:
-
-**CUDA 11.7**
-**Python 3.11**
 
 Clone repo:
 
