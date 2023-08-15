@@ -11,11 +11,11 @@ The repository contains a friendly empathetic telegram chat-bot
 * **src/** - source code
     - **fine_tune.py**  - fine-tuning script
     - **fine_tuning_config.py** - config for fine-tuning
-    - **inference_config.py** - config for chat-bot inference
     - **prepare_data.py** - script to prepare data
     - **prompt_templates.py** - just prompt templates used in fine-tuning an at inference
-    - **tg_bot.py** - telegram bot app
-    - **utils.py** - some utilities for telegram bot app
+* **inference_config.py** - config for chat-bot inference
+* **tg_bot.py** - telegram bot app
+* **utils.py** - some utilities for telegram bot app
 
 
 # How-to
